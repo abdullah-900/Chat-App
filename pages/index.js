@@ -1,6 +1,12 @@
-export default function chatapp() {
-    return(
+import Login from "./Login";
+import Register from "./Register"; 
+import React from 'react'
+import Home from "./Home";
 
-        <h1>chat app</h1>
-    )
+const chatapp = () => {
+  return (
+    <Home/>
+  )
 }
+
+export default chatapp
