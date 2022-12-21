@@ -13,16 +13,13 @@ const Register = () => {
       <label htmlFor="file">Add an avatar
       <img style={{width:'32px', height:'32px'}} src='/avatar.png'></img>
       <input style={{display:'none'}} id="file" type='file'></input> 
-      
       </label>
       <button>sign up</button>
-      
       <p>you already have an account ? sign in</p>
       </form>
       </div>
     </div>
   )
-  
-}
 
+}
 export default Register

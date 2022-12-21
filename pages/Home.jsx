@@ -1,14 +1,12 @@
 import React from "react";
 import Sidebar from "./components/Sidebar";
-import Navbar from "./components/Navbar";
-import Messagearea from "./components/Messagearea";
-
-
+import Chat from "./components/Chat";
 const Home = () => {
   return (
     <div className="appContainer">
       <div className="appWrapper">
-       <Navbar/>
+      <Sidebar/>
+      <Chat/>
       </div>
     </div>
   );
