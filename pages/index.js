@@ -1,19 +1,17 @@
-import Login from "./Login";
 import Register from "./Register"; 
-import React from 'react'
-import Home from "./Home";
-import Head from 'next/head'
-
+import { useContext,useEffect } from "react";
+import { AuthContext } from "./components/context/AuthContext";
+import Router from "next/router";
 const chatapp = () => {
-  return (
-    <>
-      <Head>
-        <title>Chatium</title>
-        <meta name="viewport" content="width=device-width"></meta>
-      </Head>
-    <Home/>
-    </>
-  )
-}
+  const {currentUser}=useContext(AuthContext)
+  console.log(currentUser)
+useEffect(()=>{
+  if(currentUser===null) {
+    Router.push('/Login')
+  } else if (currentUser) {
+     Router.push('/Home')
+  }
+},[currentUser])
 
+}
 export default chatapp
