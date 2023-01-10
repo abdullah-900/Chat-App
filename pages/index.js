@@ -4,7 +4,6 @@ import { AuthContext } from "./components/context/AuthContext";
 import Router from "next/router";
 const chatapp = () => {
   const {currentUser}=useContext(AuthContext)
-  console.log(currentUser)
 useEffect(()=>{
   if(currentUser===null) {
     Router.push('/Login')

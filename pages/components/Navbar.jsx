@@ -16,8 +16,8 @@ Router.push('/Login')
     <div className='Navbar'>
       <span className='logo'>Placid</span>
       <div className="user">
-        <img src="/man.png"></img>
-        {currentUser?<span>{currentUser.displayName}</span>:<span>displayName</span>}
+        {<img src={currentUser?.photoURL}></img>}
+        {<span>{currentUser?.displayName}</span>}
         <button onClick={handleClick}>logout</button>
       </div>
     </div>
