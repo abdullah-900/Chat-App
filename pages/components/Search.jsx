@@ -1,14 +1,15 @@
-import React from 'react'
 import { useState,useContext } from 'react'
 import { AuthContext } from './context/AuthContext';
 import { collection,setDoc, query, where,getDocs,updateDoc, serverTimestamp,doc,getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 const Search = () => {
   const {currentUser}=useContext(AuthContext)
   const [username,setUserName]=useState("")
   const [user,setUser]=useState(null)
   const [err,setErr]=useState(false)
+
   function handleKey(e) {
     e.code==="Enter"&& handleSearch();
    }
@@ -45,7 +46,7 @@ try {
           displayName:user.displayName,
           photoURL:user.photoURL,
           date:serverTimestamp(),
-        
+          
         },
     });
     await updateDoc(doc(db,"userChats",user.uid), {
@@ -54,7 +55,7 @@ try {
         displayName:currentUser.displayName,
         photoURL:currentUser.photoURL,
         date:serverTimestamp(),
-       
+        
       },
   });
   
@@ -72,15 +73,21 @@ if (user) {
   return (
     <div className="search">
       <input value={username} placeholder="Find a user" onKeyDown={handleKey} type="text" onChange={(e)=>setUserName(e.target.value)}></input>
-    <div onClick={handleSelect} className='userinfo'>
+      <div className='adduser'>
+      <div  className='userinfo'>
     {<img src={user?.photoURL}></img>}
     {<span>{user?.displayName}</span>} 
     </div>
+    <FontAwesomeIcon style={{cursor:'pointer'}} onClick={handleSelect} icon={faUserPlus} />
+      </div>
+    
+    
     </div>
   )
 }else {
   return(
   <div className="search">
+   
       <input value={username} placeholder="Find a user" onKeyDown={handleKey} type="text" onChange={(e)=>setUserName(e.target.value)}></input>
       {err && <span>user not found <button onClick={()=>{
         setErr(false)

@@ -1,4 +1,3 @@
-import Register from "./Register"; 
 import { useContext,useEffect } from "react";
 import { AuthContext } from "./components/context/AuthContext";
 import Router from "next/router";

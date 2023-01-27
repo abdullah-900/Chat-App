@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Message from './Message'
 import { userContext } from './context/user'
 import { doc, onSnapshot } from "firebase/firestore";
@@ -16,7 +16,6 @@ useEffect(()=>{
    }
 combinedId && getmessage()
 },[combinedId])
-console.log(messages)
   return (
     <div className='messages'>
        {messages?.map((m)=>( <Message message={m} key={m.id}/>))}

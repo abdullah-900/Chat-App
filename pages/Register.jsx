@@ -1,12 +1,11 @@
-import React, { use, useState } from "react";
+import {useState } from "react";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { signOut } from "firebase/auth";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage, db } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
-
-
 const Register = () => {
   const [error, setError] = useState(false);
   const router=useRouter()
@@ -32,18 +31,21 @@ const Register = () => {
         displayName,
         photoURL: url,
       });
-      const document = await setDoc(doc(db, "users", response.user.uid), {
+      await setDoc(doc(db, "users", response.user.uid), {
         uid: response.user.uid,
         displayName: displayName,
         email: email,
         photoURL: url,
-        
+        state:false,
+        keeplogged:false,
       });
-      const chats=await setDoc(doc(db, "userChats", response.user.uid), {
+      await setDoc(doc(db, "userChats", response.user.uid), {
+      
+      });
+      signOut(auth)
+      router.push('/Login')
+    
      
-      });
-      router.push('/Home')
-
     } catch (error) {
       setError(true);
     }

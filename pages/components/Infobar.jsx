@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVideo,faUserPlus,faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus,faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from './context/user'
 const Infobar = () => {
   const {selectedUser}=useContext(userContext)

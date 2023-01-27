@@ -1,7 +1,7 @@
-import React ,{useState,useContext} from 'react'
+import {useState,useContext} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperclip } from '@fortawesome/free-solid-svg-icons'
 import {faImage} from '@fortawesome/free-regular-svg-icons'
+import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 import { db,storage } from '../../firebase'
 import { doc,  updateDoc , arrayUnion, Timestamp, serverTimestamp } from "firebase/firestore"; 
 import { userContext } from './context/user'
@@ -13,12 +13,9 @@ const Sendmessage = () => {
   const {currentUser}=useContext(AuthContext)
   const {selectedUser}=useContext(userContext)
   const {combinedId}=useContext(userContext)
-  
-  const {setMessage}=useContext(userContext)
   const [text,setText]=useState('')
   const [img,setImg]=useState('')
-
-  console.log(combinedId)
+ const sendButton={color:'#009eff',cursor:'pointer'}
  async function handleSend () {
     if(img) {
       const imgref = ref(storage, `images/${uuid()}`);
@@ -46,28 +43,28 @@ const Sendmessage = () => {
     await updateDoc(doc(db, "userChats", currentUser.uid), {
    [combinedId+".lastmessage"] :{
     text,
+    senderId:currentUser.uid,
    },
-   [combinedId+".date"]:serverTimestamp()
+   [combinedId+".date"]:serverTimestamp(),
     });
     await updateDoc(doc(db, "userChats", selectedUser.uid), {
       [combinedId+".lastmessage"] :{
        text,
+       senderId:selectedUser.uid,
       },
       [combinedId+".date"]:serverTimestamp()
        });
-    setText('')
-    setImg('')
-    
+  
+    setText("")
   }
-  console.log(selectedUser)
   return (
     <div className='sendmessage'>
             <input  value={text} onChange={e=>setText(e.target.value)} placeholder='Type something...' type="text" />
             <label htmlFor='up'>
-            <input value={img} onChange={e=>setImg(e.target.files[0])} id='up' style={{display:'none'}} type='file'></input>
+            <input  onChange={e=>setImg(e.target.files[0])} id='up' style={{display:'none'}} type='file'></input>
             <FontAwesomeIcon style={{color:'gray',cursor:'pointer'}}  icon={faImage}/>
             </label>
-            <button onClick={()=>{handleSend()}}>send</button>
+            {selectedUser?<FontAwesomeIcon style={text?sendButton:{color:'grey'}} onClick={()=>{if(text || img) handleSend()}} icon={faPaperPlane} />:<FontAwesomeIcon style={{color:'grey'}} icon={faPaperPlane}/>}
     </div>
   )
 }
