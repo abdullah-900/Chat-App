@@ -307,11 +307,16 @@ background-color: #82c3ec;
           }
           .messagecontent {
             display: flex;
-            flex-direction: column;
+            border: 1px solid black;
+         
             p{
                 background-color: white;
                 padding: 10px;
                 border-radius: 0px 10px 10px 10px;
+                max-width: 80%;
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none;
             }
             img {
               width: 50%;
@@ -327,7 +332,10 @@ background-color: #82c3ec;
                 background-color: #82c3ec;
                 color: white;
                 border-radius: 10px 0px 10px 10px;
-               max-width: max-content;
+               max-width: 80%;
+               -webkit-user-select: none; /* Safari */
+               -ms-user-select: none; /* IE 10 and IE 11 */
+               user-select: none;
             }
         }
         }

@@ -1,15 +1,16 @@
 import React, { useContext } from 'react'
 import { useState,useEffect} from 'react';
-import { doc, onSnapshot,updateDoc,getDoc } from "firebase/firestore";
+import { doc, onSnapshot,updateDoc,getDoc,deleteField  } from "firebase/firestore";
 import { db } from '../../firebase';
 import { AuthContext } from './context/AuthContext';
 import { userContext } from './context/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircle,faUserXmark } from '@fortawesome/free-solid-svg-icons';
 import { render } from 'react-dom';
 const Chats = () => {
   const {currentUser}=useContext(AuthContext)
  const {setSelectedUser}=useContext(userContext)
+ const {selectedUser}=useContext(userContext)
  const {setCombinedId}=useContext(userContext)
  const {combinedId}=useContext(userContext)
   const [chat,setChat]=useState()
@@ -45,7 +46,14 @@ function handleOpen(d) {
 setSelectedUser(d[1])
 setCombinedId(d[0])
 }
-
+async function handleRemove() {
+  await updateDoc(doc(db,"userChats",currentUser.uid), {
+    [combinedId]:deleteField()
+});
+await updateDoc(doc(db,"userChats",selectedUser.uid), {
+  [combinedId]:deleteField()
+});
+}
   return (
     <>
   
@@ -55,8 +63,8 @@ setCombinedId(d[0])
     <div className="message">
         <span>{chat[1].displayName} {chat[1].state?.state?<FontAwesomeIcon style={{color:'green'}} size='2xs'  icon={faCircle} />:<FontAwesomeIcon style={{color:'gray'}} size='2xs'  icon={faCircle} />}</span> 
         <p>{chat[1].lastmessage?.text}</p>
-      
         </div>
+        {combinedId && <FontAwesomeIcon onClick={handleRemove} style={{alignSelf:'center',justifySelf:'right'}} icon={faUserXmark}/>}
   </div>
   ))}
   </>

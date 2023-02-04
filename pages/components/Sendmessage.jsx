@@ -17,13 +17,14 @@ const Sendmessage = () => {
   const [img,setImg]=useState('')
  const sendButton={color:'#009eff',cursor:'pointer'}
  async function handleSend () {
+ let id=uuid();
     if(img) {
       const imgref = ref(storage, `images/${uuid()}`);
       await uploadBytes(imgref,img);
       const url = await getDownloadURL(imgref);
       await updateDoc(doc(db, "Chats", combinedId), {
         messages: arrayUnion({
-        id:uuid(),
+        id:id,
         message:text,
         senderId:currentUser.uid,
         date:Timestamp.now(),
@@ -33,7 +34,7 @@ const Sendmessage = () => {
     }else{
       await updateDoc(doc(db, "Chats", combinedId), {
         messages: arrayUnion({
-        id:uuid(),
+        id:id,
         message:text,
         senderId:currentUser.uid,
         date:Timestamp.now(),
@@ -43,14 +44,14 @@ const Sendmessage = () => {
     await updateDoc(doc(db, "userChats", currentUser.uid), {
    [combinedId+".lastmessage"] :{
     text,
-    senderId:currentUser.uid,
+    id:id,
    },
    [combinedId+".date"]:serverTimestamp(),
     });
     await updateDoc(doc(db, "userChats", selectedUser.uid), {
       [combinedId+".lastmessage"] :{
        text,
-       senderId:selectedUser.uid,
+       id:id,
       },
       [combinedId+".date"]:serverTimestamp()
        });
