@@ -1,4 +1,4 @@
-import {useState } from "react";
+import {createElement, useEffect, useState } from "react";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut } from "firebase/auth";
@@ -6,8 +6,11 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage, db } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+
 const Register = () => {
   const [error, setError] = useState(false);
+
+  
   const router=useRouter()
   async function handleSubmit(e) {
     e.preventDefault();
@@ -16,8 +19,16 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
-
+ 
     try {
+      if (typeof window !== 'undefined') {
+        // create a new image element
+    const img = new Image();
+    
+    // set the source of the image
+    img.src = "/blank.png";
+    
+      }
       const response = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -25,7 +36,14 @@ const Register = () => {
       );
      
       const imgref = ref(storage, `images/${displayName + date}`);
-      const img = await uploadBytes(imgref, file);
+      
+      if (file) { await uploadBytes(imgref, file);
+      }else {
+        const imgUrl = 'https://i.imgur.com/OAI1jMl.png';
+        const response = await fetch(imgUrl);
+        const blob = await response.blob();
+        await uploadBytes(imgref, blob);
+      }
       const url = await getDownloadURL(imgref);
       const profile = await updateProfile(response.user, {
         displayName,

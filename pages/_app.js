@@ -4,18 +4,17 @@ import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { AuthContext } from './components/context/AuthContext'
 import { userContext } from './components/context/user';
-import { doc, setDoc,updateDoc,getDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore"; 
 import { db } from '../firebase';
 import Head from 'next/head';
 export default function MyApp({ Component, pageProps }) {
    const [currentUser, setCurrentUser] = useState({});
    const [selectedUser,setSelectedUser]=useState();
    const [combinedId,setCombinedId]=useState();
-   
-   
+   const [messages,setMessages]=useState([])
   useEffect(() => {
     const unsub=onAuthStateChanged(auth, (user) => {
-        setCurrentUser(user);
+          setCurrentUser(user);
         currentUser?.uid && check()
          async function check() {
           if (user) {
@@ -39,7 +38,7 @@ export default function MyApp({ Component, pageProps }) {
     <title>Placid</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"></meta>
   </Head>
-  <userContext.Provider value={{setSelectedUser,selectedUser,combinedId,setCombinedId}}>
+  <userContext.Provider value={{setSelectedUser,selectedUser,combinedId,setCombinedId,messages,setMessages}}>
     <AuthContext.Provider value={{currentUser}}>
       <Component {...pageProps} />
       </AuthContext.Provider>

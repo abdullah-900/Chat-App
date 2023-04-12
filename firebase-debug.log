@@ -1,0 +1,28 @@
+[debug] [2023-03-10T09:25:28.141Z] ----------------------------------------------------------------------
+[debug] [2023-03-10T09:25:28.143Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2023-03-10T09:25:28.143Z] CLI Version:   11.24.1
+[debug] [2023-03-10T09:25:28.144Z] Platform:      win32
+[debug] [2023-03-10T09:25:28.144Z] Node Version:  v18.7.0
+[debug] [2023-03-10T09:25:28.144Z] Time:          Fri Mar 10 2023 11:25:28 GMT+0200 (Eastern European Standard Time)
+[debug] [2023-03-10T09:25:28.145Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-03-10T09:25:28.151Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-03-10T09:25:28.152Z] > authorizing via signed-in user (body90000@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\abdal\Documents\GitHub\chat-app
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 

@@ -26,7 +26,7 @@ body, html {
 * {
   margin: 0;
   padding: 0;
-  
+  box-sizing:border-box;
 }
 
 a:link,a:visited,a:active {
@@ -111,6 +111,7 @@ background-color: #82c3ec;
    height: 100vh;
     display: flex;
   .appWrapper {
+    
     overflow: hidden;
     @include tablet(){
        flex: 1;
@@ -124,26 +125,28 @@ background-color: #82c3ec;
  }
     display: flex;
       .sideBar {
+        flex: 1;
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
         &::-webkit-scrollbar {
           display: none;
       }
       border-radius: 8px 0px 0px 8px;
         overflow: scroll;
       display: flex;
-      flex: 1;
+     
       flex-direction: column;
       background-color: #404258;
       color: #f1f6f5;
       .Navbar {
+        
         @include mobile(){
           flex-direction: column;
           align-items: center;
-          justify-content: center;
-          gap: 5px;
+          justify-content: space-between;
+          gap: 15px;
           
-        }
-        @include pc() {
-          gap: 80px;
         }
         padding: 12.6px;
         display: flex;  
@@ -153,12 +156,25 @@ background-color: #82c3ec;
         .logo {
           font-weight: bold;
           font-size: 16px;
+         
+          
         }
         .user {
-          color: #f1f6f5;
           display: flex;
+          justify-content: space-around;
+          color: #f1f6f5;
           flex: 1;
-          gap: 8px;
+         
+          .profile{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap:5px;
+            flex: 1;
+          }
+          @include mobile(){
+            gap: 25px;
+          }
           font-size: 14px;
           align-items: center;
           img {
@@ -215,11 +231,20 @@ background-color: #82c3ec;
  }
       }
       .Chats {
+        margin: 5px;
+        justify-content: space-between;
         display: flex;
         gap: 10px;
         margin-bottom: 20px;
         cursor: pointer;
+      .avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
         .message {
+          
           border-radius: 0px 8px 8px 0px;
           display: flex;
           gap: 10px;
@@ -235,9 +260,10 @@ background-color: #82c3ec;
             @include mobile() {
               font-size: 10px;
             }
-            font-size: 16px;
+            font-size: 16px;  
           }
         }
+      }
         &:hover {
           background-color: #50577a;
         }
@@ -249,21 +275,20 @@ background-color: #82c3ec;
       }
     }
     .Chat {
+      flex: 2;
       border-radius: 0px 8px 8px 0px;
       overflow: hidden;
       display: flex;
-      flex: 2;
       justify-content: space-between;
       flex-direction: column;
       .Infobar {
          @include mobile() {
-          padding: 32.7px;
+          padding: 48.3px;
          }
         color: #f1f6f5;
         background-color: #6b728e;
-        padding: 20px;
+        padding: 22.5px;
         display: flex;
-        flex: 1;
         white-space: nowrap;
         align-items: center;
         justify-content: space-between;
@@ -275,6 +300,7 @@ background-color: #82c3ec;
         }
       }
       .messages {
+        
         &::-webkit-scrollbar {
             display: none;
         }
@@ -287,7 +313,7 @@ background-color: #82c3ec;
           display: flex;
           gap: 10px;
           align-items: center;
-          margin-bottom: 20px;
+          margin-bottom: 50px;
           .messageinfo {
             display: flex;
             gap: 5px;
@@ -307,13 +333,12 @@ background-color: #82c3ec;
           }
           .messagecontent {
             display: flex;
-            border: 1px solid black;
-         
+            flex-direction: column;
             p{
                 background-color: white;
                 padding: 10px;
                 border-radius: 0px 10px 10px 10px;
-                max-width: 80%;
+                max-width:fit-content;
                 -webkit-user-select: none; /* Safari */
                 -ms-user-select: none; /* IE 10 and IE 11 */
                 user-select: none;
@@ -332,7 +357,7 @@ background-color: #82c3ec;
                 background-color: #82c3ec;
                 color: white;
                 border-radius: 10px 0px 10px 10px;
-               max-width: 80%;
+                max-width:fit-content;
                -webkit-user-select: none; /* Safari */
                -ms-user-select: none; /* IE 10 and IE 11 */
                user-select: none;

@@ -81,8 +81,11 @@ function handleMouse () {
       <div className='messagecontent' onMouseLeave={()=>{setCheck(false)}}  onMouseOver={handleMouse}>
        {check && <FontAwesomeIcon  style={{alignSelf:'center',justifySelf:'flex-start'}} onClick={()=>{handleDelete(message.id)}} icon={faXmark} /> }
       {message.message==""?<span></span>:<p>{message.message}</p>}
-      <img src={message.img}></img>
+      {message?.img && <img style={{}} src={message.img}></img>}
       </div>
+      
+
+ 
       </div>
   )
 }

@@ -4,7 +4,8 @@ import { userContext } from './context/user'
 import { doc, onSnapshot } from "firebase/firestore";
 import {db} from "../../firebase"
 const Messages = () => {
-  const [messages,setMessages]=useState([])
+  const {messages}=useContext(userContext)
+  const {setMessages}=useContext(userContext)
   const {combinedId}=useContext(userContext)
   
 useEffect(()=>{

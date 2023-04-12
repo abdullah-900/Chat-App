@@ -12,12 +12,15 @@ const Search = () => {
   const [err,setErr]=useState(false)
 
   function handleKey(e) {
-    e.code==="Enter"&& handleSearch();
+    if (e.code==="Enter"){
+    e.preventDefault();
+     handleSearch();
+    }
    }
  async function handleSearch() {
 try {
   
-    const usersRef = collection(db, "users")
+  const usersRef = collection(db, "users")
   const q = query(usersRef, where("displayName", "==", username));
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
@@ -60,6 +63,26 @@ try {
       },
   });
   
+    } else {
+      await updateDoc(doc(db,"userChats",currentUser.uid), {
+        [combinedId]:{
+          uid:user.uid,
+          displayName:user.displayName,
+          photoURL:user.photoURL,
+          date:serverTimestamp(),
+          
+        },
+    });
+    await updateDoc(doc(db,"userChats",user.uid), {
+      [combinedId]:{
+        uid:currentUser.uid,
+        displayName:currentUser.displayName,
+        photoURL:currentUser.photoURL,
+        date:serverTimestamp(),
+        
+      },
+  });
+  
     }
     
    
@@ -73,7 +96,7 @@ try {
 if (user) {
   return (
     <div className="search">
-      <input value={username} placeholder="Find a user" onKeyDown={handleKey} type="text" onChange={(e)=>setUserName(e.target.value)}></input>
+      <input inputmode="search" value={username} placeholder="Find a user" onKeyDown={handleKey} type="text" onChange={(e)=>setUserName(e.target.value)}></input>
       <div className='adduser'>
       <div  className='userinfo'>
     {<img src={user?.photoURL}></img>}

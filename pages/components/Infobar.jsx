@@ -5,6 +5,7 @@ import { userContext } from './context/user'
 const Infobar = () => {
   const {selectedUser}=useContext(userContext)
   return (
+    
     <div className='Infobar'>
     <span>{selectedUser?.displayName}</span>
     <div className='icons'>
