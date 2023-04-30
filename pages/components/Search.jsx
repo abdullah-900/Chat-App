@@ -97,8 +97,8 @@ if (user) {
       <input autoCapitalize='sentences' value={username} placeholder="Find a user" onKeyDown={handleKey} type="search" onChange={(e)=>setUserName(e.target.value)}></input>
       <div className='adduser'>
       <div  className='userinfo'>
-    {<img src={user?.photoURL}></img>}
-    {<span>{user?.displayName}</span>} 
+    <img alt='profilepic' src={user?.photoURL}></img>
+    <span>{user?.displayName}</span>
     </div>
     <FontAwesomeIcon style={{cursor:'pointer'}} onClick={handleSelect} icon={faUserPlus} />
   

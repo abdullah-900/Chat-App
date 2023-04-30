@@ -75,14 +75,14 @@ function handleMouse () {
   return (
     <div ref={ref} className={`message ${message.senderId===currentUser?.uid && "owner"}`}>
       <div className='messageinfo'>
-      <img src={message.senderId===currentUser?.uid ?currentUser.photoURL:selectedUser?.photoURL}></img>
+      <img alt='sentimage' src={message.senderId===currentUser?.uid ?currentUser.photoURL:selectedUser?.photoURL}></img>
       <span>{date}</span>
       </div>
       
       <div className='messagecontent' onMouseLeave={()=>{setCheck(false)}}  onMouseOver={handleMouse}>
        {check && <FontAwesomeIcon  style={{cursor:'pointer',alignSelf:'center',justifySelf:'flex-start'}} onClick={()=>{handleDelete(message.id)}} icon={faXmark} /> }
       {message.message==""?<span></span>:<p>{message.message}</p>}
-      {message?.img && <img style={{}} src={message.img}></img>}
+      {message?.img && <img alt='sentimage' style={{}} src={message.img}></img>}
       </div>
       
 

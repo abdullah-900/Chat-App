@@ -5,7 +5,7 @@ import { db } from '../../firebase';
 import { AuthContext } from './context/AuthContext';
 import { userContext } from './context/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle,faUserXmark,faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircle,faXmark } from '@fortawesome/free-solid-svg-icons';
 const Chats = () => {
   const {currentUser}=useContext(AuthContext)
  const {setSelectedUser}=useContext(userContext)
@@ -14,7 +14,7 @@ const Chats = () => {
  const {combinedId}=useContext(userContext)
  const {setMessages}=useContext(userContext)
   const [chat,setChat]=useState()
-  const [rerender,setRerender]=useState(false)
+
     useEffect(()=>{
       function getChat() {
       const unsub = onSnapshot(doc(db, "userChats",currentUser?.uid ), (doc) => {
@@ -39,7 +39,7 @@ const Chats = () => {
             [a[0]+".state"] :{
              state:uids.data().state,
             }});  
-            setRerender(!rerender)
+         
           }
         }
       }
@@ -73,7 +73,7 @@ setSelectedUser()
   {chat && Object.entries(chat).sort((a,b)=>a[1].date-b[1].date).map((chat) =>(
     <div className="Chats" key={chat[0]} onClick={()=>{handleOpen(chat)}}>
       <div className='avatar'>
-     <img src={chat[1].photoURL}></img>
+     <img alt='profilepic' src={chat[1].photoURL}></img>
     <div className="message">
       <div className='state'>
         <span>{chat[1].displayName}</span>

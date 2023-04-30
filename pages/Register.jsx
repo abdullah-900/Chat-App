@@ -85,7 +85,7 @@ const Register = () => {
     <div className="formContainer">
       <div className="formWrapper">
         <span>
-          <img src="/Logo.png"></img>
+          <img alt="logo" src="/Logo.png"></img>
         </span>
        
         <form onSubmit={handleSubmit}>
@@ -95,6 +95,7 @@ const Register = () => {
           <label htmlFor="file">
             Add an avatar
             <img
+            alt="profilepic"
               style={{ width: "32px", height: "32px" }}
               src={"/avatar.png"}
             ></img>

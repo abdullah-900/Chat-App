@@ -33,7 +33,7 @@ function handleClose() {
     setShow(true);
    }
   
- 
+   // eslint-disable-next-line react-hooks/exhaustive-deps
  useEffect(()=>{
   currentUser?.uid && keepLoggedCheck()
   async function keepLoggedCheck() {
@@ -49,6 +49,7 @@ const val= await state.data().keeplogged
   }
 
  },[currentUser?.uid])
+   // eslint-disable-next-line react-hooks/exhaustive-deps
  useEffect(()=>{
   loop && val && changeName()
  async function changeName() {
@@ -140,7 +141,7 @@ img && updateImage()
       <div className="user">
         <div className='profile'>
         <label  style={{cursor:'pointer'}}>  
-        {<img onClick={handleShow}  src={currentUser?.photoURL}></img>}
+        <img alt='profilepic' onClick={handleShow}  src={currentUser?.photoURL}></img>
           </label>
 
    {editName || <span onMouseOver={()=>{setEditUserName(true)}} onMouseLeave={()=>{setTimeout(()=>{setEditUserName(false)},6000)}}>{currentUser?.displayName}</span>}
@@ -157,7 +158,7 @@ img && updateImage()
       <Modal size={desktopLaptop?'sm':''} show={show} onHide={handleClose}>
         <Modal.Body >
          <label style={{cursor:'pointer'}} htmlFor="file" >
-          <Image fluid src={currentUser?.photoURL}></Image>
+          <Image alt='profilepic' fluid src={currentUser?.photoURL}></Image>
           <input onChange={(e)=>{setImg(e.target.files[0])}} style={{ display: "none" }} id="file" type="file"></input>
           </label> 
           </Modal.Body>

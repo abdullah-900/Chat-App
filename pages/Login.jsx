@@ -46,7 +46,7 @@ setIsLoading(false);
     <div className='formContainer'>
      <div className='formWrapper'>
       
-        <img  src='/Logo.png'></img>
+        <img alt='logo'  src='/Logo.png'></img>
    
       <form onSubmit={handleSubmit}>
       <input type='email' placeholder='email'></input> 

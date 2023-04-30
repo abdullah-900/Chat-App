@@ -20,7 +20,6 @@ const Sendmessage = () => {
   const [loading,setLoading]=useState(false)
  const sendButton={color:'#009eff',cursor:'pointer'}
 const [smiles,setSmiles]=useState([])
-console.log(img)
  async function emoji(keyword) {
   const face= await fetch (`https://emojihub.yurace.pro/api/all/category/${keyword}`)
   const lst= await face.json()
