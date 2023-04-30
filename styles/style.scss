@@ -1,3 +1,4 @@
+@import "~bootstrap/scss/bootstrap";
 @mixin mobile {
   @media screen and (max-width:480px) {
     @content;
@@ -54,6 +55,7 @@ background-color: #82c3ec;
     padding: 20px;
     border-radius: 9px;
     text-align: center;
+    align-items: center;
     .checkbox{
       gap: 5px;
       justify-content: center;
@@ -140,15 +142,15 @@ background-color: #82c3ec;
       background-color: #404258;
       color: #f1f6f5;
       .Navbar {
-        
         @include mobile(){
-          flex-direction: column;
+          font-size: 1.1rem;
           align-items: center;
           justify-content: space-between;
           gap: 15px;
           
         }
-        padding: 12.6px;
+        padding: 16.5px 12px 16.5px 12px;
+        display: inline-block;
         display: flex;  
         align-items: center;
         background-color: #6b728e;
@@ -165,23 +167,34 @@ background-color: #82c3ec;
           color: #f1f6f5;
           flex: 1;
          
-          .profile{
+          .profile{ 
+            span{
+              line-height: 0;
+              font-size: 16px;
+            }
+        
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            gap:5px;
+            gap:10px;
             flex: 1;
+            input{
+              width: 100%;
+            }
           }
-          @include mobile(){
-            gap: 25px;
-          }
+          
           font-size: 14px;
           align-items: center;
           img {
-            width: 32px;
-            height: 32px;
+            @include mobile(){
+              width: 40px;
+              height: 40px;
+            }
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             object-fit: cover;
+          
           }
           button {
             padding: 10px;
@@ -223,42 +236,49 @@ background-color: #82c3ec;
     -webkit-user-select: none;
     -moz-user-select: none;
     img {
-      width: 24px;
-      height: 24px;
+      @include mobile(){
+        width: 40px;
+        height: 40px;
+      }
+      width: 48px;
+      height: 48px;
       object-fit: cover;
+      border-radius: 50%;
     }
   }
  }
       }
       .Chats {
+      
         margin: 5px;
-        justify-content: space-between;
+        align-items: center;
         display: flex;
-        gap: 10px;
+      justify-content: space-between;
         margin-bottom: 20px;
         cursor: pointer;
       .avatar {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
+        gap: 15px;
+        padding: 10px;
         .message {
-          
+          .state{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            
+          }
           border-radius: 0px 8px 8px 0px;
           display: flex;
-          gap: 10px;
+          gap: 7px;
           flex-direction: column;
+          
           span {
-            @include mobile() {
-              font-size: 18px;
-            }
-            font-size: 24px;
-            font-weight: 500;
+            font-size: 16px;
           }
           p {
             @include mobile() {
-              font-size: 10px;
+              font-size: 12px;
             }
             font-size: 16px;  
           }
@@ -268,31 +288,59 @@ background-color: #82c3ec;
           background-color: #50577a;
         }
         img {
+          @include mobile(){
+            width: 40px;
+            height: 40px;
+          }
           border-radius: 50%;
-          width: 32px;
-          height: 32px;
+          width: 48px;
+          height: 48px;
         }
       }
     }
     .Chat {
+      @include mobile(){
+        flex: 1;
+      }
       flex: 2;
       border-radius: 0px 8px 8px 0px;
       overflow: hidden;
       display: flex;
       justify-content: space-between;
       flex-direction: column;
+      
       .Infobar {
-         @include mobile() {
-          padding: 48.3px;
-         }
+ 
+        @include mobile(){
+          padding: 29.2px 15px 29.2px 15px;
+        }
+        img{
+          @include mobile(){
+            width: 40px;
+            height: 40px;
+          }
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+        }
+        span{
+          font-size: 16px;
+          line-height: 0;
+        }
         color: #f1f6f5;
         background-color: #6b728e;
-        padding: 22.5px;
+        padding: 33px 20px 33px 20px ;
         display: flex;
         white-space: nowrap;
         align-items: center;
-        justify-content: space-between;
+       justify-content: space-between;
         .icons {
+          @include tablet(){
+            gap: 15px;
+          }
+          @include mobile(){
+            gap: 15px;
+          }
           display: flex;
           gap: 10px;
           color: #f1f6f5;
@@ -305,7 +353,7 @@ background-color: #82c3ec;
             display: none;
         }
         background-color:  #ddddf7;
-        padding: 10px;
+        padding: 15px;
         height: calc(100% - 88px);
         overflow: scroll;
         .message {
@@ -326,9 +374,14 @@ background-color: #82c3ec;
               color: gray;
             }
             img {
-              width: 24px;
-              height: 24px;
+              @include mobile(){
+                width: 24px;
+                height: 24px;
+              }
+              width: 35px;
+              height: 35px;
               object-fit: cover;
+              border-radius: 50%;
             }
           }
           .messagecontent {
@@ -366,7 +419,6 @@ background-color: #82c3ec;
         }
       }
       .sendmessage {
-        
         gap: 10px;
         display: flex;
         flex: 1;
@@ -398,6 +450,28 @@ background-color: #82c3ec;
         }
       }
       
+    }
+    .emojiList{
+      overflow: hidden;
+      background-color: #E6E6FA;
+      height: 300px;
+      .emojiGroups{
+  display: flex;
+  justify-content: space-between;
+   margin: 15px;
+   span{
+    font-size: 19px;
+    cursor: pointer;
+    
+   }
+      }
+      .emojis{
+        span{
+          margin:5px;
+        }
+        height: 100%;
+        overflow: scroll;
+      }
     }
   }
 }

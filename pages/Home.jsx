@@ -1,10 +1,12 @@
 import Sidebar from "./components/Sidebar";
-import { useContext,useEffect } from "react";
+import { useContext,useEffect,useState } from "react";
 import { AuthContext } from "./components/context/AuthContext";
 import Router from "next/router";
 import Chat from "./components/Chat";
 const Home = () => {
+
   const {currentUser}=useContext(AuthContext)
+ const [showSide,setShowSide]=useState(true)
  
 useEffect(()=>{
   
@@ -20,8 +22,8 @@ useEffect(()=>{
   return (
     <div className="appContainer">
       <div className="appWrapper">
-      <Sidebar/>
-      <Chat/>
+     {showSide && <Sidebar/> }
+      <Chat set={setShowSide} val={showSide}/>
       </div>
     </div>
   );

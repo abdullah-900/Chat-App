@@ -1,21 +1,21 @@
 import { signOut,updateProfile } from 'firebase/auth'
-import { Auth } from 'firebase/auth'
 import { AuthContext } from './context/AuthContext'
-import { useContext,useEffect,useState } from 'react'
+import { useContext,useEffect,useState,useMemo } from 'react'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db,storage } from '../../firebase'
-import Router from 'next/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightFromBracket,faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { collection,query, where,doc,setDoc, getDoc,getDocs, updateDoc} from 'firebase/firestore'
+import Modal from 'react-bootstrap/Modal';
+import Image from 'react-bootstrap/Image'
 
-
-
+import { useMediaQuery } from 'react-responsive';
 const  Navbar = () => {
   const {currentUser}=useContext(AuthContext)
   const [editUserName,setEditUserName]=useState(false)
    const [editName,setEditName]=useState(false)
+   const [show, setShow] = useState(false);
     const [img,setImg]=useState()
      const [displayN,setDisplayN]=useState('')
     const [val,setVal]=useState([])
@@ -23,11 +23,16 @@ const  Navbar = () => {
     const [imgurl,setImgUrl]=useState('')
     const [loop,setLoop]=useState(false)
     const [imgloop,setImgloop]=useState(false)
-    
-  function handleClick () {
-    signOut(auth)
-Router.push('/Login')
-  }
+    const desktopLaptop = useMediaQuery({
+      query: '(min-width: 950px)'
+    })
+function handleClose() {
+  setShow(false);
+}
+   function handleShow() {
+    setShow(true);
+   }
+  
  
  useEffect(()=>{
   currentUser?.uid && keepLoggedCheck()
@@ -90,12 +95,13 @@ useEffect(()=>{
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
  const arrays=Object.entries(doc.data())
- const objects=arrays[0][1]
+ if (arrays.length>0) {
+  const objects=arrays[0][1]
 if (objects.displayName==currentUser?.displayName) {
   setVal(prev => [...prev,arrays[0][0]]);
 }
+ }
 });
-console.log(val)
 setLoop(true)
  }
 
@@ -109,9 +115,11 @@ async function findImage () {
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
  const arrays=Object.entries(doc.data())
- const objects=arrays[0][1]
-if (objects.photoURL==currentUser?.photoURL) {
-  setImage(prev => [...prev,arrays[0][0] ]);
+if (arrays.length>0) {
+  const objects=arrays[0][1]
+  if (objects.photoURL==currentUser?.photoURL) {
+    setImage(prev => [...prev,arrays[0][0] ]);
+  }
 }
 });
 setImgloop(true)
@@ -126,27 +134,37 @@ img && updateImage()
     setImg(null);
     await findImage()
   }
- 
+
   return (
     <div className='Navbar'>
-      <span>Placid</span>
       <div className="user">
         <div className='profile'>
-        <label style={{cursor:'pointer'}} htmlFor="file">  
-        {<img src={currentUser?.photoURL}></img>}
-            <input onChange={(e)=>{setImg(e.target.files[0])}} style={{ display: "none" }} id="file" type="file"></input>
+        <label  style={{cursor:'pointer'}}>  
+        {<img onClick={handleShow}  src={currentUser?.photoURL}></img>}
           </label>
+
    {editName || <span onMouseOver={()=>{setEditUserName(true)}} onMouseLeave={()=>{setTimeout(()=>{setEditUserName(false)},6000)}}>{currentUser?.displayName}</span>}
-{editName && <input onChange={(e)=>{setDisplayN(e.target.value)}} value={displayN}  style={{flex:'1'}}></input>}
+{editName && <input onChange={(e)=>{setDisplayN(e.target.value)}} value={displayN}  ></input>}
 {editName && <FontAwesomeIcon onClick={editN}  style={{cursor:'pointer'}} icon={faCheck}></FontAwesomeIcon>}
        { editUserName && <FontAwesomeIcon onClick={()=>{  setDisplayN(currentUser?.displayName)
         setEditName(true)}}  style={{cursor:'pointer'}} icon={faPenToSquare}></FontAwesomeIcon>}
         </div>
-        <FontAwesomeIcon  style={{cursor:'pointer'}} onClick={handleClick} icon={faArrowRightFromBracket} />
+        
       </div>
-      <div>
-      
-      </div>
+      <>
+
+
+      <Modal size={desktopLaptop?'sm':''} show={show} onHide={handleClose}>
+        <Modal.Body >
+         <label style={{cursor:'pointer'}} htmlFor="file" >
+          <Image fluid src={currentUser?.photoURL}></Image>
+          <input onChange={(e)=>{setImg(e.target.files[0])}} style={{ display: "none" }} id="file" type="file"></input>
+          </label> 
+          </Modal.Body>
+
+      </Modal>
+    </>
+
     </div>
   )
  }

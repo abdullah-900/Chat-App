@@ -5,7 +5,7 @@ import { db } from '../../firebase';
 import { AuthContext } from './context/AuthContext';
 import { userContext } from './context/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle,faUserXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircle,faUserXmark,faXmark } from '@fortawesome/free-solid-svg-icons';
 const Chats = () => {
   const {currentUser}=useContext(AuthContext)
  const {setSelectedUser}=useContext(userContext)
@@ -75,12 +75,15 @@ setSelectedUser()
       <div className='avatar'>
      <img src={chat[1].photoURL}></img>
     <div className="message">
-        <span>{chat[1].displayName} {chat[1].state?.state?<FontAwesomeIcon style={{color:'green'}} size='2xs'  icon={faCircle} />:<FontAwesomeIcon style={{color:'gray',alignSelf:'center',justifySelf:'center'}} size='2xs'  icon={faCircle} />}</span> 
-        <p>{chat[1].lastmessage?.text}</p>
-        </div>
-        </div>
+      <div className='state'>
+        <span>{chat[1].displayName}</span>
+        {chat[1].state?.state?<FontAwesomeIcon style={{color:'green'}} size='2xs'  icon={faCircle} />:<FontAwesomeIcon style={{color:'gray',alignSelf:'center',justifySelf:'center'}} size='2xs'  icon={faCircle} />}
         
-        {combinedId && <FontAwesomeIcon onClick={handleRemove} style={{alignSelf:'center'}} icon={faUserXmark}/>}
+        </div> 
+        {(chat[1].lastmessage?.text) ?  <p>{chat[1].lastmessage?.text}</p>:'' } 
+        </div>
+        </div>
+        {combinedId && <FontAwesomeIcon  onClick={handleRemove} icon={faXmark} />}
   </div>
   
   ))}

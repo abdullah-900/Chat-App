@@ -7,12 +7,15 @@ import {signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
 import { doc,setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 const Login = () => {
   const [error,setError]=useState(false)
   const [keep,setKeep]=useState(false)
 const {currentUser}=useContext(AuthContext)
+const [isLoading, setIsLoading] = useState(false);
 useEffect (()=>{
+
   currentUser?.uid && updatelog()
   async function updatelog() {
     if (keep) {
@@ -23,17 +26,18 @@ useEffect (()=>{
   }
 },[currentUser?.uid,keep])
  async function handleSubmit(e) {
+  setIsLoading(true)
   e.preventDefault();
   try {
  const email=e.target[0].value;
  const password=e.target[1].value;
 await signInWithEmailAndPassword(auth, email, password)
-
 Router.push('/Home')
 
   }
 catch{
-setError(true)
+setError(true);
+setIsLoading(false);
 }
   
 }
@@ -41,9 +45,9 @@ setError(true)
   return (
     <div className='formContainer'>
      <div className='formWrapper'>
-      <span>
+      
         <img  src='/Logo.png'></img>
-      </span>
+   
       <form onSubmit={handleSubmit}>
       <input type='email' placeholder='email'></input> 
       <input type='password' placeholder='password'></input>
@@ -51,7 +55,11 @@ setError(true)
       <input onChange={e=>setKeep(e.target.checked)} type='checkbox' id='login'></input>
       <label htmlFor='login'>keep me logged in</label>
       </div>
-      <button>sign in</button>
+      <button type="submit" disabled={isLoading}>{isLoading ? (
+        <FontAwesomeIcon icon={faSpinner} spin />
+      ) : 
+        'Login'
+      }</button>
       <p>you don't have an account ? <Link href='/Register'>Register</Link></p>
       {error && <p>something went wrong</p>}
       </form>

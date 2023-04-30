@@ -12,14 +12,12 @@ const Search = () => {
   const [err,setErr]=useState(false)
 
   function handleKey(e) {
-    if (e.code==="Enter"){
-    e.preventDefault();
+    if (e.keyCode === 13){
      handleSearch();
     }
    }
  async function handleSearch() {
 try {
-  
   const usersRef = collection(db, "users")
   const q = query(usersRef, where("displayName", "==", username));
   const querySnapshot = await getDocs(q);
@@ -43,7 +41,7 @@ try {
   try {
     const res=await getDoc(doc(db, "Chats", combinedId));
     if (!res.exists() && username!==currentUser.displayName ) {
-      await setDoc(doc(db, "Chats", combinedId), {messsages:[]});
+      await setDoc(doc(db, "Chats", combinedId), {});
       await updateDoc(doc(db,"userChats",currentUser.uid), {
         [combinedId]:{
           uid:user.uid,
@@ -96,7 +94,7 @@ try {
 if (user) {
   return (
     <div className="search">
-      <input inputmode="search" value={username} placeholder="Find a user" onKeyDown={handleKey} type="text" onChange={(e)=>setUserName(e.target.value)}></input>
+      <input autoCapitalize='sentences' value={username} placeholder="Find a user" onKeyDown={handleKey} type="search" onChange={(e)=>setUserName(e.target.value)}></input>
       <div className='adduser'>
       <div  className='userinfo'>
     {<img src={user?.photoURL}></img>}
@@ -113,7 +111,8 @@ if (user) {
   return(
   <div className="search">
    
-      <input value={username} placeholder="Find a user" onKeyDown={handleKey} type="text" onChange={(e)=>setUserName(e.target.value)}></input>
+      <input autoCapitalize="on" value={username} placeholder="Find a user" onKeyDown={handleKey} type="search" onChange={(e)=>{setUserName(e.target.value)
+        }}></input>
       {err && <span>user not found <button onClick={()=>{
         setErr(false)
         setUserName("")

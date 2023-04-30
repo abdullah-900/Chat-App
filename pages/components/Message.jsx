@@ -40,6 +40,7 @@ async function handleDelete(e) {
   const dellast2=Object.entries(lastm2.data())
   const messages=Object.entries(chats.data())
   const messagesarr=messages[0][1]
+  console.log(messagesarr)
   for(const a of messagesarr) {
     if (a.id===e && a.senderId===currentUser.uid ) {
         await updateDoc(doc(db, "Chats", combinedId), {
@@ -79,7 +80,7 @@ function handleMouse () {
       </div>
       
       <div className='messagecontent' onMouseLeave={()=>{setCheck(false)}}  onMouseOver={handleMouse}>
-       {check && <FontAwesomeIcon  style={{alignSelf:'center',justifySelf:'flex-start'}} onClick={()=>{handleDelete(message.id)}} icon={faXmark} /> }
+       {check && <FontAwesomeIcon  style={{cursor:'pointer',alignSelf:'center',justifySelf:'flex-start'}} onClick={()=>{handleDelete(message.id)}} icon={faXmark} /> }
       {message.message==""?<span></span>:<p>{message.message}</p>}
       {message?.img && <img style={{}} src={message.img}></img>}
       </div>
