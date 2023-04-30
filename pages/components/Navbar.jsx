@@ -1,6 +1,6 @@
 import { signOut,updateProfile } from 'firebase/auth'
-import { AuthContext } from './context/AuthContext'
-import { useContext,useEffect,useState,useMemo } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+import { useContext,useEffect,useState} from 'react'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db,storage } from '../../firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

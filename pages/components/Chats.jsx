@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import { useState,useEffect} from 'react';
 import { doc, onSnapshot,updateDoc,getDoc,deleteField  } from "firebase/firestore";
 import { db } from '../../firebase';
-import { AuthContext } from './context/AuthContext';
-import { userContext } from './context/user';
+import { AuthContext } from '../../context/AuthContext';
+import { userContext } from '../../context/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle,faXmark } from '@fortawesome/free-solid-svg-icons';
 const Chats = () => {

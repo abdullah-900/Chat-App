@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import {useState, useContext,useEffect} from "react";
-import { AuthContext } from './components/context/AuthContext';
+import{AuthContext} from '../context/AuthContext'
 import Router from "next/router";
 import {signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';

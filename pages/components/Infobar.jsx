@@ -1,7 +1,7 @@
 import {useContext} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket,faBars} from '@fortawesome/free-solid-svg-icons'
-import { userContext } from './context/user'
+import { userContext } from '../../context/user'
 import { signOut } from 'firebase/auth'
 import Router from 'next/router'
 import { auth } from '../../firebase'

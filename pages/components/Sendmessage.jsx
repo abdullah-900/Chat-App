@@ -5,8 +5,8 @@ import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
 import { db,storage } from '../../firebase'
 import { doc,  updateDoc , arrayUnion, Timestamp, serverTimestamp } from "firebase/firestore"; 
-import { userContext } from './context/user'
-import {AuthContext} from './context/AuthContext'
+import { userContext } from '../../context/user'
+import {AuthContext} from '../../context/AuthContext'
 import { v4 as uuid } from 'uuid'
 import { ref, uploadBytes,getDownloadURL} from "firebase/storage";
 import Spinner from 'react-bootstrap/Spinner';

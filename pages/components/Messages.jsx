@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import Message from './Message'
-import { userContext } from './context/user'
+import { userContext } from '../../context/user'
 import { doc, onSnapshot } from "firebase/firestore";
 import {db} from "../../firebase"
 const Messages = () => {

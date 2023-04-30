@@ -2,8 +2,8 @@ import '../styles/style.scss'
 import { useEffect,useState} from 'react';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { AuthContext } from './components/context/AuthContext'
-import { userContext } from './components/context/user';
+import { AuthContext } from '../context/AuthContext'
+import { userContext } from '../context/user';
 import { doc, setDoc } from "firebase/firestore"; 
 import { db } from '../firebase';
 import Head from 'next/head';

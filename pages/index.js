@@ -1,5 +1,5 @@
 import { useContext,useEffect } from "react";
-import { AuthContext } from "./components/context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import Router from "next/router";
 const Chatapp = () => {
   const {currentUser}=useContext(AuthContext)

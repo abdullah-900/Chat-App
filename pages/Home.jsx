@@ -1,6 +1,6 @@
 import Sidebar from "./components/Sidebar";
 import { useContext,useEffect,useState } from "react";
-import { AuthContext } from "./components/context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import Router from "next/router";
 import Chat from "./components/Chat";
 const Home = () => {

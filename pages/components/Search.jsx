@@ -1,6 +1,5 @@
 import { useState,useContext } from 'react'
-import { AuthContext } from './context/AuthContext';
-import { userContext } from './context/user';
+import { AuthContext } from '../../context/AuthContext';
 import { collection,setDoc, query, where,getDocs,updateDoc, serverTimestamp,doc,getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
