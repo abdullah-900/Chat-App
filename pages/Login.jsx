@@ -60,7 +60,7 @@ setIsLoading(false);
       ) : 
         'Login'
       }</button>
-      <p>you don't have an account ? <Link href='/Register'>Register</Link></p>
+      <p>you dont have an account ? <Link href='/Register'>Register</Link></p>
       {error && <p>something went wrong</p>}
       </form>
       </div>

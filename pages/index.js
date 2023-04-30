@@ -1,7 +1,7 @@
 import { useContext,useEffect } from "react";
 import { AuthContext } from "./components/context/AuthContext";
 import Router from "next/router";
-const chatapp = () => {
+const Chatapp = () => {
   const {currentUser}=useContext(AuthContext)
 useEffect(()=>{
   if(currentUser===null) {
@@ -12,4 +12,4 @@ useEffect(()=>{
 },[currentUser])
 
 }
-export default chatapp
+export default Chatapp

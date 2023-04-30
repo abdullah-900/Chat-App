@@ -110,8 +110,8 @@ setSmiles(val)
     <span onClick={()=>{emoji('objects')}}>🔑</span>
     </div>
     <div className='emojis'>
-    {smiles.map(sm => (
-  <span style={{cursor:'pointer'}} onClick={updateString}>{String.fromCodePoint(parseInt(sm.replace("U+", ""), 16))}</span>
+    {smiles.map((sm,i) => (
+  <span key={i} style={{cursor:'pointer'}} onClick={updateString}>{String.fromCodePoint(parseInt(sm.replace("U+", ""), 16))}</span>
 ))}
     </div>
 
