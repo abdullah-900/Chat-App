@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/style.scss'
 import { useEffect,useState} from 'react';
 import { auth } from '../firebase';
