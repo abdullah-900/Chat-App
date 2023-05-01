@@ -1,37 +1,25 @@
 import {useContext,useEffect,useRef,useState} from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import {userContext} from '../../context/user'
-import { doc,updateDoc,getDoc, arrayRemove, arrayUnion } from "firebase/firestore";
+import { doc,updateDoc,getDoc, arrayRemove } from "firebase/firestore";
 import { db } from '../../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark} from '@fortawesome/free-solid-svg-icons'
 
 const Message = ({message}) => {
   const [check,setCheck]=useState(false)
+  const [date,setDate]=useState('')
   const {combinedId}=useContext(userContext)
   const {currentUser}=useContext(AuthContext)
   const {selectedUser}=useContext(userContext)
   const ref=useRef()
 
-
-  async function trytech() {
-    const lastm1=await getDoc(doc(db, "userChats",currentUser?.uid))
-    const lastm2=await getDoc(doc(db,"userChats",selectedUser?.uid))
-    const dellast1=Object.entries(lastm1.data())
-    const dellast2=Object.entries(lastm2.data())
-for (const a of dellast1) {
-  if (a[0]===combinedId && a[1].lastmessage.senderId===currentUser.uid) {
-    await updateDoc(doc(db, "userChats", currentUser.uid), {
-      [a[0]+".lastmessage"] :{
-      },
-       });
-  }
-}
-  }
   useEffect(()=>{
     ref.current?.scrollIntoView({behavior:'smooth'})
   },[message])
-const date =message.date?.toDate().toLocaleTimeString()
+useEffect (()=>{
+  setDate(message.date?.toDate().toLocaleTimeString())
+},[selectedUser])
 async function handleDelete(e) {
   const chats=await getDoc(doc(db, "Chats",combinedId));
   const lastm1=await getDoc(doc(db, "userChats",currentUser?.uid))
@@ -40,7 +28,6 @@ async function handleDelete(e) {
   const dellast2=Object.entries(lastm2.data())
   const messages=Object.entries(chats.data())
   const messagesarr=messages[0][1]
-  console.log(messagesarr)
   for(const a of messagesarr) {
     if (a.id===e && a.senderId===currentUser.uid ) {
         await updateDoc(doc(db, "Chats", combinedId), {
@@ -73,16 +60,16 @@ function handleMouse () {
 
 }
   return (
-    <div ref={ref} className={`message ${message.senderId===currentUser?.uid && "owner"}`}>
+    <div ref={ref} className={`message ${message?.senderId===currentUser?.uid && "owner"}`}>
       <div className='messageinfo'>
-      <img alt='sentimage' src={message.senderId===currentUser?.uid ?currentUser.photoURL:selectedUser?.photoURL}></img>
+      <img alt='profilepic' src={message?.senderId===currentUser?.uid ?currentUser.photoURL:selectedUser?.photoURL}></img>
       <span>{date}</span>
       </div>
       
       <div className='messagecontent' onMouseLeave={()=>{setCheck(false)}}  onMouseOver={handleMouse}>
-       {check && <FontAwesomeIcon  style={{cursor:'pointer',alignSelf:'center',justifySelf:'flex-start'}} onClick={()=>{handleDelete(message.id)}} icon={faXmark} /> }
-      {message.message==""?<span></span>:<p>{message.message}</p>}
-      {message?.img && <img alt='sentimage' style={{}} src={message.img}></img>}
+       {check && <FontAwesomeIcon  style={{cursor:'pointer',alignSelf:'center',justifySelf:'flex-start'}} onClick={()=>{handleDelete(message?.id)}} icon={faXmark} /> }
+      {message?.message==""?<span></span>:<p>{message?.message}</p>}
+      {message?.img && <img alt='sentimage' style={{}} src={message?.img}></img>}
       </div>
       
 
