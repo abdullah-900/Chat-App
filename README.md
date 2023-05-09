@@ -44,6 +44,6 @@ This will start the app in development mode on http://localhost:3000.
 
 ## Future Improvements
 
-
+- Allowing users to block other users.
 - Implement push notifications for new messages or other events in the app using Firebase Cloud Messaging or a third-party service like OneSignal.
 - Allowing users to react to messages with emojis or other icons, similar to how Facebook Messenger or Slack works.
