@@ -10,10 +10,17 @@ import { db } from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 const Login = () => {
+
   const [error,setError]=useState(false)
   const [keep,setKeep]=useState(false)
 const {currentUser}=useContext(AuthContext)
+console.log(currentUser)
 const [isLoading, setIsLoading] = useState(false);
+useEffect(()=>{
+  if(currentUser) {
+    Router.push('/Home')
+  } 
+},[currentUser])
 useEffect (()=>{
 
   currentUser?.uid && updatelog()
