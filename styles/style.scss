@@ -127,6 +127,7 @@ background-color: #82c3ec;
  }
     display: flex;
       .sideBar {
+        margin-right: -1px;
         flex: 1;
         -webkit-user-select: none; /* Safari */
         -ms-user-select: none; /* IE 10 and IE 11 */
@@ -149,7 +150,7 @@ background-color: #82c3ec;
           gap: 15px;
           
         }
-        padding: 16.5px 12px 16.5px 12px;
+        padding: 16.5px 10px 16.5px 10px;
         display: inline-block;
         display: flex;  
         align-items: center;
@@ -171,12 +172,15 @@ background-color: #82c3ec;
             span{
               line-height: 0;
               font-size: 16px;
+              @include mobile(){
+                font-size:12px;
+              }
             }
         
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            gap:10px;
+            gap:6px;
             flex: 1;
             input{
               width: 100%;
@@ -187,8 +191,8 @@ background-color: #82c3ec;
           align-items: center;
           img {
             @include mobile(){
-              width: 40px;
-              height: 40px;
+              width: 30px;
+              height: 30px;
             }
             width: 48px;
             height: 48px;
@@ -258,14 +262,19 @@ background-color: #82c3ec;
         cursor: pointer;
       .avatar {
         display: flex;
-        gap: 15px;
-        padding: 10px;
+        gap: 7px;
+        padding:10px 0px 10px 10px;
+
         .message {
           .state{
+            margin-top: 9px;
+            @include mobile(){
+              margin-top: 3px;
+            }
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 7px;
             
           }
           border-radius: 0px 8px 8px 0px;
@@ -275,6 +284,9 @@ background-color: #82c3ec;
           
           span {
             font-size: 16px;
+            @include mobile(){
+              font-size: 13px;
+            }
           }
           p {
             @include mobile() {
@@ -289,8 +301,8 @@ background-color: #82c3ec;
         }
         img {
           @include mobile(){
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
           }
           border-radius: 50%;
           width: 48px;
@@ -310,9 +322,9 @@ background-color: #82c3ec;
       flex-direction: column;
       
       .Infobar {
- 
+      
         @include mobile(){
-          padding: 29.2px 15px 29.2px 15px;
+          padding: 29.2px 15px 18.8px 15px;
         }
         img{
           @include mobile(){

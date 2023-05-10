@@ -9,7 +9,8 @@ import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { collection,query, where,doc,setDoc, getDoc,getDocs, updateDoc} from 'firebase/firestore'
 import Modal from 'react-bootstrap/Modal';
 import Image from 'react-bootstrap/Image'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useMediaQuery } from 'react-responsive';
 const  Navbar = () => {
   const {currentUser}=useContext(AuthContext)
@@ -107,8 +108,12 @@ setLoop(true)
  }
 
  async function editN() {
+  if (displayN.length<=20) {
  await findName()
   setEditName(false)
+  } else{
+    toast("displayname max characters is 20");
+  }
 }
 async function findImage () {
   const usersRef = collection(db, "userChats")
@@ -137,6 +142,8 @@ img && updateImage()
   }
 
   return (
+    <>
+     <ToastContainer />
     <div className='Navbar'>
       <div className="user">
         <div className='profile'>
@@ -144,8 +151,8 @@ img && updateImage()
         <img alt='profilepic' onClick={handleShow}  src={currentUser?.photoURL}></img>
           </label>
 
-   {editName || <span onMouseOver={()=>{setEditUserName(true)}} onMouseLeave={()=>{setTimeout(()=>{setEditUserName(false)},6000)}}>{currentUser?.displayName}</span>}
-{editName && <input onChange={(e)=>{setDisplayN(e.target.value)}} value={displayN}  ></input>}
+   {editName || <span   onMouseOver={()=>{setEditUserName(true)}} onMouseLeave={()=>{setTimeout(()=>{setEditUserName(false)},3000)}}>{currentUser?.displayName}</span>}
+{editName && <input onChange={(e)=>{setDisplayN(e.target.value)}} value={displayN}></input>}
 {editName && <FontAwesomeIcon onClick={editN}  style={{cursor:'pointer'}} icon={faCheck}></FontAwesomeIcon>}
        { editUserName && <FontAwesomeIcon onClick={()=>{  setDisplayN(currentUser?.displayName)
         setEditName(true)}}  style={{cursor:'pointer'}} icon={faPenToSquare}></FontAwesomeIcon>}
@@ -167,6 +174,7 @@ img && updateImage()
     </>
 
     </div>
+    </>
   )
  }
 

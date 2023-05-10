@@ -13,6 +13,7 @@ const Register = () => {
   const [error, setError] = useState(false);
   const [err,setErr]=useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [invalidName,setInvalidName]=useState(false)
   const router=useRouter()
   async function handleSubmit(e) {
     setIsLoading(true);
@@ -29,7 +30,8 @@ const Register = () => {
     if (exists) {
       setErr(true)
       setIsLoading(false);
-    }else{
+    }else if(displayName.length<=20){
+      setErr(false)
       try {
         if (typeof window !== 'undefined') {
           // create a new image element
@@ -47,7 +49,9 @@ const Register = () => {
        
         const imgref = ref(storage, `images/${displayName + date}`);
         
-        if (file) { await uploadBytes(imgref, file);
+        if (file) {
+           await uploadBytes(imgref, file);
+           
         }else {
           const imgUrl = 'https://i.imgur.com/OAI1jMl.png';
           const response = await fetch(imgUrl);
@@ -78,6 +82,9 @@ const Register = () => {
         setError(true);
         setIsLoading(false);
       }
+    }else{
+      setInvalidName(true);
+      setIsLoading(false);
     }
   
   }
@@ -107,6 +114,7 @@ const Register = () => {
         'SignUp'
       }</button>
           <p>you already have an account ? <Link href="/Login">log in</Link> </p>
+          {invalidName && <p>displayName must be less than 20 characters</p>}
           {error && <span>something went wrong</span>}
           {err && <span>display Name already taken</span>}
         </form>
