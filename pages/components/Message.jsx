@@ -8,7 +8,6 @@ import { faXmark} from '@fortawesome/free-solid-svg-icons'
 import Modal from 'react-bootstrap/Modal';
 import Image from 'react-bootstrap/Image'
 import { useMediaQuery } from 'react-responsive';
-import { ModalHeader } from 'react-bootstrap';
 const Message = ({message}) => {
   const [check,setCheck]=useState(false)
   const [date,setDate]=useState('')
@@ -82,7 +81,6 @@ function handleMouse () {
         <Modal.Body >
           <Image alt='sent message' fluid src={message?.img}></Image>
           </Modal.Body>
-
       </Modal>
 
  
