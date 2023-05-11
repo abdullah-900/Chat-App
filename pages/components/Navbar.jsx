@@ -32,6 +32,7 @@ function handleClose() {
 }
    function handleShow() {
     setShow(true);
+    toast('Click on image again to change it')
    }
   
    // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,7 +149,7 @@ img && updateImage()
       <div className="user">
         <div className='profile'>
         <label  style={{cursor:'pointer'}}>  
-        <img alt='profilepic' onClick={handleShow}  src={currentUser?.photoURL}></img>
+        <img  alt='profilepic' onClick={handleShow}  src={currentUser?.photoURL}></img>
           </label>
 
    {editName || <span   onMouseOver={()=>{setEditUserName(true)}} onMouseLeave={()=>{setTimeout(()=>{setEditUserName(false)},3000)}}>{currentUser?.displayName}</span>}

@@ -3,8 +3,11 @@ import { useContext,useEffect,useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Router from "next/router";
 import Chat from "./components/Chat";
+import { toast } from "react-toastify";
 const Home = () => {
-
+useEffect(()=>{
+  toast('Click on name or image to change them')
+},[])
   const {currentUser}=useContext(AuthContext)
  const [showSide,setShowSide]=useState(true)
  
