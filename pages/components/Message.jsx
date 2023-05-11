@@ -5,13 +5,20 @@ import { doc,updateDoc,getDoc, arrayRemove } from "firebase/firestore";
 import { db } from '../../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark} from '@fortawesome/free-solid-svg-icons'
-
+import Modal from 'react-bootstrap/Modal';
+import Image from 'react-bootstrap/Image'
+import { useMediaQuery } from 'react-responsive';
+import { ModalHeader } from 'react-bootstrap';
 const Message = ({message}) => {
   const [check,setCheck]=useState(false)
   const [date,setDate]=useState('')
   const {combinedId}=useContext(userContext)
   const {currentUser}=useContext(AuthContext)
   const {selectedUser}=useContext(userContext)
+  const [show, setShow] = useState(false);
+  const desktopLaptop = useMediaQuery({
+    query: '(min-width: 950px)'
+  })
   const ref=useRef()
 
   useEffect(()=>{
@@ -69,9 +76,14 @@ function handleMouse () {
       <div className='messagecontent' onMouseLeave={()=>{setCheck(false)}}  onMouseOver={handleMouse}>
        {check && <FontAwesomeIcon  style={{cursor:'pointer',alignSelf:'center',justifySelf:'flex-start'}} onClick={()=>{handleDelete(message?.id)}} icon={faXmark} /> }
       {message?.message==""?<span></span>:<p>{message?.message}</p>}
-      {message?.img && <img alt='sentimage' style={{}} src={message?.img}></img>}
+      {message?.img && <img onClick={()=>setShow(true)} alt='sentimage' style={{}} src={message?.img}></img>}
       </div>
-      
+      <Modal size={desktopLaptop?'sm':''} show={show} onHide={()=>setShow(setShow(false))}>
+        <Modal.Body >
+          <Image alt='sent message' fluid src={message?.img}></Image>
+          </Modal.Body>
+
+      </Modal>
 
  
       </div>

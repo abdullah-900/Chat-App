@@ -14,10 +14,10 @@ Router.push('/Login')
   }
   return ( 
     <div className='Infobar'>
-  {v?<FontAwesomeIcon rotation={90} style={{cursor:'pointer'}} onClick={()=>{s(!v)}} icon={faBars} />:<FontAwesomeIcon style={{cursor:'pointer'}} onClick={()=>{s(!v)}} icon={faBars}  />}
-    <span>{selectedUser?.displayName}</span>
+  {v?<FontAwesomeIcon size='sm' rotation={90} style={{cursor:'pointer'}} onClick={()=>{s(!v)}} icon={faBars} />:<FontAwesomeIcon style={{cursor:'pointer'}} onClick={()=>{s(!v)}} icon={faBars}  />}
+    <span >{selectedUser?.displayName}</span>
     <div className='icons'>
-    <FontAwesomeIcon   style={{cursor:'pointer'}} onClick={handleClick} icon={faArrowRightFromBracket} />
+    <FontAwesomeIcon size='sm'   style={{cursor:'pointer'}} onClick={handleClick} icon={faArrowRightFromBracket} />
 
     </div>
   </div>

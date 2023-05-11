@@ -10,6 +10,7 @@ import {AuthContext} from '../../context/AuthContext'
 import { v4 as uuid } from 'uuid'
 import { ref, uploadBytes,getDownloadURL} from "firebase/storage";
 import Spinner from 'react-bootstrap/Spinner';
+
 const Sendmessage = () => {
   const {currentUser}=useContext(AuthContext)
   const {selectedUser}=useContext(userContext)
@@ -86,7 +87,8 @@ setSmiles(val)
   return (
     <>
     <div className='sendmessage'>
-            <input  value={text} onChange={e=>setText(e.target.value)} placeholder='Type something...' type="text" />
+      
+      <input  value={text} onChange={e=>setText(e.target.value)} placeholder='Type something...' type="text" />
             <FontAwesomeIcon onClick={()=>{Setshow(!show)}} icon={faFaceSmile} style={{color:'gray',cursor:'pointer'}} />
             <label htmlFor='up'>
             <input  onChange={e=>setImg(e.target.files[0])} id='up' style={{display:'none'}} type='file'></input>
