@@ -154,8 +154,8 @@ img && updateImage()
 
    {editName || <span   onMouseOver={()=>{setEditUserName(true)}} onMouseLeave={()=>{setTimeout(()=>{setEditUserName(false)},3000)}}>{currentUser?.displayName}</span>}
 {editName && <input onChange={(e)=>{setDisplayN(e.target.value)}} value={displayN}></input>}
-{editName && <FontAwesomeIcon onClick={editN}  style={{cursor:'pointer'}} icon={faCheck}></FontAwesomeIcon>}
-       { editUserName && <FontAwesomeIcon onClick={()=>{  setDisplayN(currentUser?.displayName)
+{editName && <FontAwesomeIcon size='sm' onClick={editN}  style={{cursor:'pointer'}} icon={faCheck}></FontAwesomeIcon>}
+       { editUserName && <FontAwesomeIcon size='sm' onClick={()=>{  setDisplayN(currentUser?.displayName)
         setEditName(true)}}  style={{cursor:'pointer'}} icon={faPenToSquare}></FontAwesomeIcon>}
         </div>
         

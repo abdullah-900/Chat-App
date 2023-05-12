@@ -92,9 +92,9 @@ setSelectedUser()
         </div>
         </div>
         {combinedId && <FontAwesomeIcon  onClick={handleRemove} icon={faXmark} />}
-        <Modal size={desktopLaptop?'sm':''} show={show} onHide={()=>setShow(setShow(false))}>
+        <Modal  size={desktopLaptop?'sm':''} show={show} onHide={()=>setShow(setShow(false))}>
         <Modal.Body >
-          <Image alt='sent message' fluid src={chat[1].photoURL}></Image>
+          <Image style={{cursor:'pointer'}} alt='sent message' fluid src={chat[1].photoURL}></Image>
           </Modal.Body>
 
       </Modal>
