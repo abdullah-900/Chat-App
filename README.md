@@ -3,7 +3,7 @@
 
 This is a chat application built using Next.js, React, Firebase, SCSS, React Bootstrap, and the Emojihub API. The app allows users to create an account using their email and password, search for other users by their display name, and add them to their account. Once added, both users can exchange messages, photos, and emojis.
 
-## Link
+## Demo
 https://main.d8uzwaw1a5stp.amplifyapp.com/Login
 
 ## Installation
