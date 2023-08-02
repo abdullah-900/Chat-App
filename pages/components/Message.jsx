@@ -36,8 +36,10 @@ async function handleDelete(e) {
   const messagesarr=messages[0][1]
   for(const a of messagesarr) {
     if (a.id===e && a.senderId===currentUser.uid ) {
+      a.message='message deleted'
+      a.img=''
         await updateDoc(doc(db, "Chats", combinedId), {
-          messages:arrayRemove(a)
+          messages:messagesarr
       });
     }
     for (const a of dellast1) {

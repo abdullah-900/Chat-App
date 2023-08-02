@@ -151,7 +151,6 @@ img && updateImage()
         <label  style={{cursor:'pointer'}}>  
         <img  alt='profilepic' onClick={handleShow}  src={currentUser?.photoURL}></img>
           </label>
-
    {editName || <span   onMouseOver={()=>{setEditUserName(true)}} onMouseLeave={()=>{setTimeout(()=>{setEditUserName(false)},3000)}}>{currentUser?.displayName}</span>}
 {editName && <input onChange={(e)=>{setDisplayN(e.target.value)}} value={displayN}></input>}
 {editName && <FontAwesomeIcon size='sm' onClick={editN}  style={{cursor:'pointer'}} icon={faCheck}></FontAwesomeIcon>}
